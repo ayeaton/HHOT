@@ -7,7 +7,7 @@ def OT_calc(source, target, p = 2, blur = 0.05, debias = True, use_pot = False, 
     # calculate OT
     if use_pot:
         C = ot.dist(source, target)
-        d = ot.sinkhorn2(ot.unif(len(source)),ot.unif(len(target)),C/C.max(),reg)[0]*C.max()
+        d = ot.sinkhorn2(ot.unif(len(source)),ot.unif(len(target)),C/C.max(),reg)*C.max()
     else: # use geomloss
         source_torch = torch.tensor(source, requires_grad = True).cuda()
         target_torch = torch.tensor(target).cuda()
@@ -17,7 +17,7 @@ def OT_calc(source, target, p = 2, blur = 0.05, debias = True, use_pot = False, 
 
 
 def HHOT(cost,reg = 0.03):
-    d = ot.sinkhorn2(ot.unif(cost.shape[0]),ot.unif(cost.shape[1]),cost/cost.max(),reg)[0]*cost.max()
+    d = ot.sinkhorn2(ot.unif(cost.shape[0]),ot.unif(cost.shape[1]),cost/cost.max(),reg)*cost.max()
     return d
 
 def get_hdf5_size(glob_str):
@@ -41,3 +41,8 @@ def get_keys_type(glob_str):
 
 def create_hdf5_dtset_vect(h5_file_write, keys_dtype, size, vect_size):
         h5_file_write.create_dataset(keys_dtype[0], shape=(size , vect_size), dtype= keys_dtype[1])
+
+def debias(OT_ab, OT_aa, OT_bb):
+    OT_ab_debias = OT_ab - (OT_aa + OT_bb)/2
+    return OT_ab_debias
+    

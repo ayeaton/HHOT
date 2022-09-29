@@ -62,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument('--blur', default = 0.5)
     parser.add_argument('--debias', default = True)
     parser.add_argument('--use_pot', default = True)
-    parser.add_argument('--reg', default = 0.03)
+    parser.add_argument('--reg', default = 10)
     parser.add_argument('--out_path', default = "data/")
     args = parser.parse_args()
 

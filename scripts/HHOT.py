@@ -3,7 +3,7 @@ import numpy as np
 import ot
 import torch
 from geomloss import SamplesLoss
-from utils import HHOT, OT_calc
+from utils import HHOT, OT_calc, debias
 import argparse
 
 def main(dset1_path, dset2_path, 
@@ -12,8 +12,8 @@ def main(dset1_path, dset2_path,
         p, blur, debias, use_pot,
         reg, out_path):
 
-    dset1 = pd.read_csv(dset1_path,index_col=[0,1])
-    dset2 = pd.read_csv(dset2_path,index_col=[0,1])
+    dset1 = pd.read_csv(dset1_path, index_col=[0,1])
+    dset2 = pd.read_csv(dset2_path, index_col=[0,1])
 
     level1_dset1 = pd.read_csv(level1_dset1_path)
     level1_dset2 = pd.read_csv(level1_dset2_path)
@@ -54,6 +54,8 @@ def main(dset1_path, dset2_path,
     dist_mat1_df = pd.DataFrame(dist_mat1)
     dist_mat1_df.to_csv(out_path + "/HHOT_mat.csv")
 
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--dset1_path', default = "data/example_df.csv")
@@ -66,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument('--blur', default = 0.5)
     parser.add_argument('--debias', default = True)
     parser.add_argument('--use_pot', default = True)
-    parser.add_argument('--reg', default = 0.03)
+    parser.add_argument('--reg', default = 10)
     parser.add_argument('--out_path', default = "data/")
     args = parser.parse_args()
 
