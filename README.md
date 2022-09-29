@@ -14,13 +14,21 @@ conda env create -f environment.yml
 
 The packages used are:
 torch
+
 pot
+
 geomloss
+
 h5py
+
 pandas 
+
 numpy
+
 glob 
+
 argparse
+
 os  
 
 
