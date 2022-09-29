@@ -42,7 +42,7 @@ OT between A and B, you will need to calculate the OT distance
 between A and B, as well as the OT distance between A and A 
 and B and B. 
 
-To use the HHOT code with the example provided here, 
+To use the HHOT code with the example provided in the data directory, 
 run from your HHOT directory:
 
 ``` 
