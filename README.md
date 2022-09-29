@@ -13,6 +13,7 @@ conda env create -f environment.yml
 ```
 
 The packages used are:
+
 torch
 
 pot
